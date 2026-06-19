@@ -8,7 +8,11 @@ import Playlist from './pages/Playlist.jsx';
 import Recap from './pages/Recap.jsx';
 import Artist from './pages/Artist.jsx';
 import ForYou from './pages/ForYou.jsx';
-
+import Feed from './pages/Feed.jsx';
+import Profile from './pages/Profile.jsx';
+import Notifs from './pages/Notifs.jsx';
+import LogSet from './pages/LogSet.jsx';
+import Story from './pages/Story.jsx';
 export default function App() {
   return (
     <BrowserRouter>
@@ -22,6 +26,11 @@ export default function App() {
         <Route path="/playlist" element={<Playlist />} />
         <Route path="/recap" element={<Recap />} />
         <Route path="/artist/:id" element={<Artist />} />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/notifs" element={<Notifs />} />
+        <Route path="/log-set" element={<LogSet />} />
+        <Route path="/story/:type" element={<Story />} />
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

@@ -16,19 +16,19 @@ export default function AddBtn({ artistId, size = 'normal' }) {
       <button
         onClick={handleClick}
         style={{
-          width: 38,
-          height: 38,
+          width: 40,
+          height: 40,
           borderRadius: 999,
-          border: '1.5px solid var(--navy)',
-          background: added ? 'var(--blue)' : 'var(--scrap)',
-          color: added ? 'var(--on-blue)' : 'var(--navy)',
-          boxShadow: added ? 'var(--shadow-cut)' : 'none',
+          border: added ? 'none' : '1px solid var(--line)',
+          background: added ? 'var(--blue)' : 'var(--white)',
+          color: added ? 'var(--white)' : 'var(--ink)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: '18px',
           cursor: 'pointer',
-          flexShrink: 0
+          flexShrink: 0,
+          transition: 'all 0.15s ease'
         }}
       >
         {added ? '✓' : '+'}
@@ -40,7 +40,7 @@ export default function AddBtn({ artistId, size = 'normal' }) {
     return (
       <button
         onClick={handleClick}
-        className={added ? 'pill pill-lime' : 'pill pill-coral'}
+        className={added ? 'pill pill-lime' : 'pill pill-ghost'}
         style={{ width: '100%' }}
       >
         {added ? '✓ In your lineup' : 'Add to my lineup'}
@@ -53,6 +53,7 @@ export default function AddBtn({ artistId, size = 'normal' }) {
     <button
       onClick={handleClick}
       className={added ? 'pill pill-lime' : 'pill pill-ghost'}
+      style={{ padding: '8px 16px', fontSize: 13 }}
     >
       {added ? '✓ Added' : '+ Add'}
     </button>

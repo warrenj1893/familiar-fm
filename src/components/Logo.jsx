@@ -1,19 +1,23 @@
 import React from 'react';
+import Sparkle from './Sparkle';
 
-export default function Logo({ size = 23, color = 'var(--navy)' }) {
+export default function Logo({ size = 24, color = 'var(--ink)', spark = 'var(--blue)' }) {
   return (
-    <div
-      style={{
-        display: 'inline-flex',
-        fontFamily: "'Bricolage Grotesque', sans-serif",
-        fontWeight: 800,
-        letterSpacing: '-0.03em',
-        fontSize: size,
-        lineHeight: 1
-      }}
-    >
-      <span style={{ color }}>familiar</span>
-      <span style={{ color: 'var(--blue)' }}>.fm</span>
-    </div>
+    <span style={{ 
+      display: 'inline-flex', 
+      alignItems: 'center', 
+      gap: size * 0.16, 
+      fontFamily: "'Hanken Grotesk', sans-serif", 
+      fontWeight: 800, 
+      fontSize: size, 
+      lineHeight: 0.9, 
+      letterSpacing: '-0.01em', 
+      color, 
+      whiteSpace: 'nowrap' 
+    }}>
+      FAMILIAR
+      <Sparkle size={size * 0.42} color={spark} style={{ margin: `0 ${-size * 0.02}px` }} />
+      FM
+    </span>
   );
 }

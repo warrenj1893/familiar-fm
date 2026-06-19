@@ -1,135 +1,59 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../components/Logo';
-import Grain from '../components/Grain';
-import Cover from '../components/Cover';
-import { FESTIVALS, coverFor } from '../data/fest';
+import { POS as O, Ink, GeoStar } from '../components/poster-kit';
+import { APhone, Avatar, AvatarStack, HubTab, ScreenHead } from '../components/app-kit';
+import { FEST } from '../data/fest';
 
 export default function Discover() {
   const navigate = useNavigate();
-  const [search, setSearch] = useState('');
-
-  const filteredFests = FESTIVALS.filter(f => 
-    f.name.toLowerCase().includes(search.toLowerCase()) || 
-    f.city.toLowerCase().includes(search.toLowerCase())
-  );
-  const droppedFests = filteredFests.filter(f => f.dropped);
-
+  const OF = "'Bricolage Grotesque', sans-serif";
+  const OM = "'DM Mono', monospace";
+  const fests = [
+    { n: 'Summerfest', loc: 'Milwaukee, WI', date: 'JUN 16 – JUL 4', match: 88, going: ['sam', 'jo', 'lia'], active: true },
+    { n: 'Pitchfork', loc: 'Chicago, IL', date: 'JUL 18 – 20', match: 73, going: ['jo'] },
+    { n: 'Riot Fest', loc: 'Chicago, IL', date: 'SEP 19 – 21', match: 64, going: [] },
+  ];
+  const dropped = [
+    { n: 'Lollapalooza', sub: '92% of your top artists', match: 92 },
+    { n: 'Outside Lands', sub: '67% match', match: 67 },
+  ];
+  const av = (ids) => ids.map((id) => FEST.friends.find((f) => f.id === id));
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--paper)', padding: '20px 0' }}>
-      <header style={{ padding: '16px 22px 0' }}>
-        <button 
-          onClick={() => navigate(-1)}
-          style={{
-            width: 30, height: 30, borderRadius: 999, border: '1.5px solid var(--navy)',
-            background: 'var(--scrap)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            cursor: 'pointer', fontSize: 14, fontWeight: 700, color: 'var(--navy)'
-          }}
-        >✕</button>
-        <div style={{ marginTop: 8 }}><Logo size={20} /></div>
-        <h1 className="hand" style={{ fontSize: 44, color: 'var(--navy)', marginTop: 12, lineHeight: 0.92 }}>
-          Pick your <span style={{ color: 'var(--blue)' }}>fest.</span>
-        </h1>
-        <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--slate)', marginTop: 8 }}>
-          We'll show you who you already know.
-        </div>
-      </header>
-
-      <div style={{ margin: '20px 22px 0' }}>
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: 10, border: '1.5px solid var(--navy)',
-          background: 'var(--scrap)', borderRadius: 999, padding: '11px 16px'
-        }}>
-          <div style={{ width: 16, height: 16, position: 'relative' }}>
-            <div style={{ width: 12, height: 12, border: '2px solid var(--slate)', borderRadius: '50%' }}></div>
-            <div style={{ width: 6, height: 2, background: 'var(--slate)', position: 'absolute', bottom: 1, right: -2, transform: 'rotate(45deg)' }}></div>
-          </div>
-          <input 
-            type="text" 
-            placeholder="Search festivals..." 
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            style={{ fontSize: 14, color: 'var(--slate)', border: 'none', outline: 'none', background: 'transparent', flex: 1 }}
-          />
-        </div>
-      </div>
-
-      <div style={{ marginTop: 24 }}>
-        <div style={{ padding: '0 22px', marginBottom: 12 }}>
-          <div className="label" style={{ color: 'var(--red)' }}>JUST DROPPED</div>
-        </div>
-        <div className="mrail" style={{ padding: '0 22px', gap: 14 }}>
-          {droppedFests.map(fest => (
-            <div key={fest.id} style={{ width: 248, flex: 'none', background: 'var(--scrap)', border: '1.5px solid var(--navy)', boxShadow: 'var(--shadow-cut)', overflow: 'hidden' }}>
-              <div style={{ position: 'relative' }}>
-                <Cover name={fest.name} height={132} />
-                <div className="sticker" style={{ position: 'absolute', top: 10, left: 10, transform: 'rotate(-3deg)' }}>
-                  ★ JUST DROPPED
-                </div>
+    <APhone>
+      <ScreenHead kicker="FESTIVALS" title="Where to?" right={<Avatar f={FEST.user} size={30} />} />
+      <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', padding: '0 22px' }}>
+        <div style={{ background: O.blue, padding: '12px 14px 14px', position: 'relative', overflow: 'hidden', marginBottom: 18 }}>
+          <Ink as="div" color={O.yellow} style={{ right: -30, top: -30, width: 110, height: 110, borderRadius: '50%' }} />
+          <div style={{ fontFamily: OM, fontSize: 10, letterSpacing: '0.18em', color: O.paper, position: 'relative' }}>★ JUST DROPPED</div>
+          <div style={{ display: 'flex', gap: 10, marginTop: 10, position: 'relative' }}>
+            {dropped.map((d) => (
+              <div key={d.n} style={{ flex: 1, background: O.paper, padding: '10px 12px' }}>
+                <div style={{ fontFamily: OF, fontWeight: 800, fontSize: 16, lineHeight: 0.95, color: O.blue }}>{d.n}</div>
+                <div style={{ fontFamily: OM, fontSize: 9, color: O.green, marginTop: 5 }}>{d.sub}</div>
               </div>
-              <div style={{ padding: '12px 14px' }}>
-                <div className="disp" style={{ fontSize: 17 }}>{fest.name}</div>
-                <div className="mono" style={{ fontSize: 10, color: 'var(--slate)', marginTop: 4 }}>{fest.city} · {fest.dates}</div>
-                <div style={{ marginTop: 8 }}>
-                  <span className="disp" style={{ fontSize: 22, color: 'var(--blue)' }}>{fest.stats.know}</span>
-                  <span style={{ fontSize: 11, color: 'var(--slate)', marginLeft: 4 }}>acts you know</span>
+            ))}
+          </div>
+        </div>
+        {fests.map((ft) => (
+          <div key={ft.n} onClick={() => navigate('/lineup')} style={{ borderBottom: `1.5px solid rgba(10,83,240,0.16)`, padding: '14px 0', cursor: 'pointer' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <span style={{ fontFamily: OF, fontWeight: 800, fontSize: 24, color: O.blue, lineHeight: 0.95, mixBlendMode: 'multiply' }}>{ft.n}</span>
+                  {ft.active && <span style={{ fontFamily: OM, fontSize: 8.5, letterSpacing: '0.08em', color: O.paper, background: O.green, padding: '2px 6px' }}>GOING</span>}
                 </div>
-                <div className="fam-bar" style={{ height: 8, marginTop: 8 }}>
-                  <div className="seg-know" style={{ flex: fest.stats.know }}></div>
-                  <div className="seg-heard" style={{ flex: fest.stats.heard }}></div>
-                  <div className="seg-new" style={{ flex: fest.stats.total - fest.stats.know - fest.stats.heard }}></div>
-                </div>
-                <button 
-                  onClick={() => navigate('/lineup')}
-                  className="pill pill-lime" 
-                  style={{ marginTop: 12, width: '100%', fontSize: 12 }}
-                >
-                  See my match →
-                </button>
+                <div style={{ fontFamily: OM, fontSize: 10, color: 'rgba(10,83,240,0.7)', marginTop: 5 }}>{ft.loc} · {ft.date}</div>
+                {ft.going.length > 0 && <div style={{ marginTop: 9 }}><AvatarStack people={av(ft.going)} size={24} /></div>}
+              </div>
+              <div style={{ textAlign: 'right', flex: 'none' }}>
+                <div style={{ fontFamily: OF, fontWeight: 800, fontSize: 30, lineHeight: 0.8, color: O.green }}>{ft.match}<span style={{ fontSize: 14 }}>%</span></div>
+                <div style={{ fontFamily: OM, fontSize: 8.5, color: 'rgba(10,83,240,0.6)', marginTop: 3 }}>MATCH</div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-
-      <div style={{ marginTop: 28 }}>
-        <div style={{ padding: '0 22px', marginBottom: 12 }}>
-          <div className="label" style={{ color: 'var(--slate)' }}>ALL FESTIVALS</div>
-        </div>
-        <div style={{ padding: '0 22px' }}>
-          {filteredFests.map(fest => {
-            const pal = coverFor(fest.name);
-            return (
-              <div 
-                key={fest.id} 
-                onClick={() => navigate('/lineup')}
-                style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 0', borderBottom: '1px solid var(--line-2)', cursor: 'pointer' }}
-              >
-                <div style={{
-                  width: 50, height: 50, background: pal.bg, border: '1.5px solid var(--navy)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontFamily: "'Bricolage Grotesque', sans-serif", fontSize: 22, color: pal.fg, fontWeight: 800
-                }}>
-                  {fest.name[0]}
-                </div>
-                <div style={{ flex: 1 }}>
-                  <div className="disp" style={{ fontSize: 15.5 }}>{fest.name}</div>
-                  <div className="mono" style={{ fontSize: 10, color: 'var(--slate)', marginTop: 2 }}>{fest.city} · {fest.dates}</div>
-                </div>
-                <div style={{ textAlign: 'right' }}>
-                  <div className="disp" style={{ fontSize: 19, color: 'var(--blue)' }}>{fest.stats.know}</div>
-                  <div className="mono" style={{ fontSize: 8, color: 'var(--slate)' }}>YOU KNOW</div>
-                </div>
-                <div>
-                  <svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="currentColor" strokeWidth="1.5"/></svg>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <Grain opacity={0.18} />
-    </div>
+      <HubTab active="plan" badge="3" navigate={navigate} />
+    </APhone>
   );
 }

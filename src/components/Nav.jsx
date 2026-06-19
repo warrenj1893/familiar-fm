@@ -6,9 +6,9 @@ export function TopNav() {
   return (
     <header className="top-nav">
       <NavLink to="/discover" style={{ display: 'flex', alignItems: 'center' }}>
-        <Logo size={23} />
+        <Logo size={20} />
       </NavLink>
-      <div style={{ width: '1.5px', height: '22px', background: 'var(--line)', margin: '0 20px' }}></div>
+      <div style={{ width: '1px', height: '22px', background: 'var(--line)', margin: '0 20px' }}></div>
       
       <div className="nav-tabs">
         <NavLink to="/lineup" className={({isActive}) => isActive ? "nav-tab active" : "nav-tab"}>Lineup</NavLink>
@@ -18,36 +18,26 @@ export function TopNav() {
       </div>
 
       <div style={{ marginLeft: 'auto' }}>
-        <div style={{
-          border: '1.5px solid var(--navy)',
-          background: 'var(--scrap)',
-          borderRadius: 999,
-          padding: '5px 5px 5px 13px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px'
-        }}>
-          <div>
-            <div style={{ fontSize: '12px', fontWeight: 700, lineHeight: 1 }}>@alexlistens</div>
-            <div style={{ fontFamily: "'DM Mono', monospace", fontSize: '9px', color: 'var(--blue)', display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
-              <div style={{ width: '6px', height: '6px', borderRadius: 999, background: 'var(--blue)' }}></div>
-              Spotify synced
-            </div>
-          </div>
-          <div style={{
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <NavLink to="/notifs" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', width: 34, height: 34, border: '1px solid var(--line)', borderRadius: 999, background: 'var(--white)', color: 'var(--ink)', textDecoration: 'none' }}>
+            <span style={{ fontSize: 18, lineHeight: 1 }}>◷</span>
+            <span style={{ position: 'absolute', top: -2, right: -2, width: 10, height: 10, background: 'var(--pink)', borderRadius: 999, border: '1.5px solid var(--white)' }}></span>
+          </NavLink>
+          
+          <NavLink to="/profile" style={{
             width: '34px',
             height: '34px',
             background: 'var(--blue)',
-            border: '1.5px solid var(--navy)',
             borderRadius: 999,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontFamily: "'Bricolage Grotesque', sans-serif",
-            fontSize: '17px',
+            fontFamily: "'Hanken Grotesk', sans-serif",
+            fontSize: '15px',
             fontWeight: 800,
-            color: 'var(--on-blue)'
-          }}>A</div>
+            color: 'var(--white)',
+            textDecoration: 'none'
+          }}>A</NavLink>
         </div>
       </div>
     </header>
@@ -64,6 +54,15 @@ export default function BottomNav() {
           <div style={{ width: '9px', height: '2px', background: 'currentColor' }}></div>
         </div>
         <span className="nav-label">Lineup</span>
+      </NavLink>
+
+      <NavLink to="/feed" className={({isActive}) => isActive ? "nav-item active" : "nav-item"}>
+        <div style={{ display: 'flex', gap: '2px', alignItems: 'flex-end', height: 16 }}>
+          <div style={{ width: '4px', height: '8px', background: 'currentColor' }}></div>
+          <div style={{ width: '4px', height: '16px', background: 'currentColor' }}></div>
+          <div style={{ width: '4px', height: '12px', background: 'currentColor' }}></div>
+        </div>
+        <span className="nav-label">Feed</span>
       </NavLink>
 
       <NavLink to="/schedule" className={({isActive}) => isActive ? "nav-item active" : "nav-item"}>
