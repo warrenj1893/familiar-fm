@@ -56,7 +56,7 @@ export default function Schedule() {
           <span style={{ fontFamily: PM, fontSize: 18, color: P.blue }}>+</span>
         </div>
       </div>
-      <HubTab active="plan" badge="3" navigate={navigate} />
+      <HubTab active="schedule" badge="3" navigate={navigate} />
     </APhone>
   );
 }

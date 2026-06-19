@@ -35,16 +35,18 @@ export function HubTab({ active = 'plan', badge, dark, navigate }) {
   const on = dark ? K.yellow : K.blue;
   const off = dark ? 'rgba(255,255,255,0.5)' : 'rgba(10,83,240,0.4)';
   const icons = {
-    plan: (c) => <g fill="none" stroke={c} strokeWidth="2.4"><rect x="3" y="4" width="18" height="17"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></g>,
+    plan: (c) => <g fill="none" stroke={c} strokeWidth="2.4"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></g>, // Magnifying glass
+    schedule: (c) => <g fill="none" stroke={c} strokeWidth="2.4"><rect x="3" y="4" width="18" height="17"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></g>, // Calendar
     feed: (c) => <g fill={c}><rect x="2" y="3" width="20" height="6"/><rect x="2" y="12" width="20" height="3"/><rect x="2" y="18" width="13" height="3"/></g>,
     notifs: (c) => <path d="M12 2a6 6 0 00-6 6c0 5-2 7-2 7h16s-2-2-2-7a6 6 0 00-6-6zM10 21a2 2 0 004 0" fill="none" stroke={c} strokeWidth="2.2" strokeLinejoin="round"/>,
     profile: (c) => <g fill={c}><circle cx="12" cy="8" r="5"/><path d="M3 22c0-5 4-8 9-8s9 3 9 8z"/></g>,
   };
-  const labels = { plan: 'Plan', feed: 'Feed', notifs: 'Alerts', profile: 'Profile' };
+  const labels = { plan: 'Discover', schedule: 'Schedule', feed: 'Feed', notifs: 'Alerts', profile: 'Profile' };
   
   const handleNav = (id) => {
     if (!navigate) return;
     if (id === 'plan') navigate('/discover');
+    else if (id === 'schedule') navigate('/schedule');
     else if (id === 'feed') navigate('/feed');
     else if (id === 'notifs') navigate('/notifs');
     else if (id === 'profile') navigate('/profile');
@@ -52,7 +54,7 @@ export function HubTab({ active = 'plan', badge, dark, navigate }) {
 
   return (
     <div style={{ flex: 'none', height: 76, borderTop: `2.5px solid ${dark ? K.yellow : K.blue}`, background: dark ? K.blue : K.paper, display: 'flex', alignItems: 'center', paddingBottom: 8 }}>
-      {['plan', 'feed', 'notifs', 'profile'].map((id) => (
+      {['plan', 'schedule', 'feed', 'notifs', 'profile'].map((id) => (
         <div key={id} onClick={() => handleNav(id)} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, position: 'relative', cursor: 'pointer' }}>
           <div style={{ position: 'relative' }}>
             <svg width="25" height="25" viewBox="0 0 24 24" style={{ mixBlendMode: dark ? 'normal' : 'multiply' }}>{icons[id](active === id ? on : off)}</svg>
