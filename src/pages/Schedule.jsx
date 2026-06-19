@@ -15,7 +15,18 @@ export default function Schedule() {
   return (
     <APhone>
       <ScreenHead onBack={() => navigate(-1)} kicker={'MY SCHEDULE · ' + FEST.dayLabel} title="Friday" right={<Avatar f={FEST.user} size={30} />} />
-      <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', padding: '0 22px' }}>
+      <div style={{ flex: 'none', display: 'flex', overflowX: 'auto', gap: 10, padding: '0 22px 14px', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' }}>
+        {FEST.days.map((d) => {
+          const isActive = d.id === FEST.theDay;
+          return (
+            <div key={d.id} style={{ border: `2px solid ${P.blue}`, background: isActive ? P.blue : 'transparent', color: isActive ? P.paper : P.blue, padding: '8px 12px', textAlign: 'center', minWidth: 54, flex: 'none', cursor: 'pointer', mixBlendMode: isActive ? 'multiply' : 'normal' }}>
+              <div style={{ fontFamily: PM, fontSize: 9, letterSpacing: '0.1em' }}>{d.dow}</div>
+              <div style={{ fontFamily: PF, fontWeight: 800, fontSize: 22, lineHeight: 0.9, marginTop: 2 }}>{d.dnum}</div>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '0 22px' }}>
         {sets.map((a, i) => {
           const going = FEST.goingWith(a.name);
           const isClash = clash(i);
