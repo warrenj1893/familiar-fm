@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login.jsx';
 import Authorize from './pages/Authorize.jsx';
+import FriendSetup from './pages/FriendSetup.jsx';
 import Discover from './pages/Discover.jsx';
+import PlanHome from './pages/PlanHome.jsx';
 import Lineup from './pages/Lineup.jsx';
 import Schedule from './pages/Schedule.jsx';
 import Playlist from './pages/Playlist.jsx';
@@ -13,13 +15,16 @@ import Profile from './pages/Profile.jsx';
 import Notifs from './pages/Notifs.jsx';
 import LogSet from './pages/LogSet.jsx';
 import Story from './pages/Story.jsx';
+
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/authorize" element={<Authorize />} />
+        <Route path="/friend-setup" element={<FriendSetup />} />
         <Route path="/discover" element={<Discover />} />
+        <Route path="/plan" element={<PlanHome />} />
         <Route path="/foryou" element={<ForYou />} />
         <Route path="/lineup" element={<Lineup />} />
         <Route path="/schedule" element={<Schedule />} />

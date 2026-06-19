@@ -44,7 +44,7 @@ export default function Authorize() {
       </div>
       <div style={{ flex: 'none', borderTop: `2.5px solid ${O.blue}`, padding: '14px 18px', display: 'flex', gap: 10 }}>
         <Btn kind="ghost" style={{ flex: 1 }} onClick={() => navigate(-1)}>Cancel</Btn>
-        <Btn kind="fill" style={{ flex: 1.4 }} onClick={() => navigate('/discover')}>Agree</Btn>
+        <Btn kind="fill" style={{ flex: 1.4 }} onClick={() => navigate('/friend-setup')}>Agree</Btn>
       </div>
     </APhone>
   );

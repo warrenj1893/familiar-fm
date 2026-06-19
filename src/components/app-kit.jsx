@@ -15,18 +15,15 @@ export const AV = { blue: K.blue, green: K.green, yellow: K.yellow, ink: '#241B3
 
 export function APhone({ children, statusInk }) {
   return (
-    <div style={{ width: 384, height: 812, background: K.blue, borderRadius: 48, padding: 11, flex: 'none', position: 'relative' }}>
-      <div style={{ width: '100%', height: '100%', borderRadius: 38, overflow: 'hidden', background: K.paper, position: 'relative', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ flex: 'none', height: 46, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', padding: '0 26px 6px', position: 'relative', zIndex: 20, color: statusInk || K.blue }}>
-          <span style={{ fontFamily: AMONO, fontWeight: 500, fontSize: 13 }}>9:41</span>
-          <div style={{ position: 'absolute', left: '50%', top: 8, transform: 'translateX(-50%)', width: 96, height: 22, background: K.blue, borderRadius: 16 }}></div>
-          <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
-            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5"/><rect x="4.5" y="4" width="3" height="7"/><rect x="9" y="2" width="3" height="9"/><rect x="13.5" y="0" width="3" height="11"/></svg>
-            <svg width="22" height="11" viewBox="0 0 24 12" fill="none"><rect x="0.5" y="0.5" width="20" height="11" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="8" fill="currentColor"/><rect x="21.5" y="4" width="2" height="4" fill="currentColor"/></svg>
-          </div>
+    <div style={{ width: '100%', height: '100dvh', background: K.paper, display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ flex: 'none', height: 46, display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', padding: '0 26px 6px', position: 'relative', zIndex: 20, color: statusInk || K.blue }}>
+        <span style={{ fontFamily: AMONO, fontWeight: 500, fontSize: 13 }}>9:41</span>
+        <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
+          <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="6" width="3" height="5"/><rect x="4.5" y="4" width="3" height="7"/><rect x="9" y="2" width="3" height="9"/><rect x="13.5" y="0" width="3" height="11"/></svg>
+          <svg width="22" height="11" viewBox="0 0 24 12" fill="none"><rect x="0.5" y="0.5" width="20" height="11" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="15" height="8" fill="currentColor"/><rect x="21.5" y="4" width="2" height="4" fill="currentColor"/></svg>
         </div>
-        <div style={{ flex: 1, minHeight: 0, position: 'relative', display: 'flex', flexDirection: 'column' }}>{children}</div>
       </div>
+      <div style={{ flex: 1, minHeight: 0, position: 'relative', display: 'flex', flexDirection: 'column' }}>{children}</div>
     </div>
   );
 }
@@ -45,7 +42,7 @@ export function HubTab({ active = 'plan', badge, dark, navigate }) {
   
   const handleNav = (id) => {
     if (!navigate) return;
-    if (id === 'plan') navigate('/discover');
+    if (id === 'plan') navigate('/plan');
     else if (id === 'schedule') navigate('/schedule');
     else if (id === 'feed') navigate('/feed');
     else if (id === 'notifs') navigate('/notifs');

@@ -35,7 +35,7 @@ export default function Discover() {
           </div>
         </div>
         {fests.map((ft) => (
-          <div key={ft.n} onClick={() => navigate('/lineup')} style={{ borderBottom: `1.5px solid rgba(10,83,240,0.16)`, padding: '14px 0', cursor: 'pointer' }}>
+          <div key={ft.n} onClick={() => navigate('/plan')} style={{ borderBottom: `1.5px solid rgba(10,83,240,0.16)`, padding: '14px 0', cursor: 'pointer' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
