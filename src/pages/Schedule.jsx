@@ -31,7 +31,7 @@ export default function Schedule() {
           const going = FEST.goingWith(a.name);
           const isClash = clash(i);
           return (
-            <div key={a.id} style={{ display: 'flex', gap: 14, padding: '12px 0', borderBottom: `1.5px solid rgba(10,83,240,0.14)` }}>
+            <div key={a.id} onClick={() => navigate(`/artist/${a.id}`)} style={{ display: 'flex', gap: 14, padding: '12px 0', borderBottom: `1.5px solid rgba(10,83,240,0.14)`, cursor: 'pointer' }}>
               <div style={{ width: 58, flex: 'none' }}>
                 <div style={{ fontFamily: PF, fontWeight: 800, fontSize: 17, color: P.blue, lineHeight: 0.95, mixBlendMode: 'multiply' }}>{a.time.replace(' PM', '').replace(' ', '')}</div>
                 <div style={{ fontFamily: PM, fontSize: 8.5, color: 'rgba(10,83,240,0.6)', marginTop: 3 }}>PM</div>
@@ -50,10 +50,16 @@ export default function Schedule() {
             </div>
           );
         })}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginTop: 14, padding: '12px 14px', border: `2px dashed ${P.blue}` }}>
-          <GeoStar size={30} color="blue" points={4} />
-          <div style={{ flex: 1 }}><div style={{ fontFamily: PF, fontWeight: 800, fontSize: 14, color: P.blue, mixBlendMode: 'multiply' }}>Drop a meetup pin</div><div style={{ fontFamily: PM, fontSize: 9, color: 'rgba(10,83,240,0.65)', marginTop: 2 }}>Pick a spot for the crew between sets</div></div>
-          <span style={{ fontFamily: PM, fontSize: 18, color: P.blue }}>+</span>
+        <div style={{ marginTop: 14, padding: '12px 14px', border: `2px solid ${P.blue}` }}>
+          <div style={{ fontFamily: PF, fontWeight: 800, fontSize: 14, color: P.blue, mixBlendMode: 'multiply' }}>Meeting Spot</div>
+          <div style={{ fontFamily: PM, fontSize: 9, color: 'rgba(10,83,240,0.65)', marginTop: 2, marginBottom: 8 }}>e.g., water station stage left, wearing blue hat</div>
+          <input type="text" placeholder="Enter meeting spot..." style={{ width: '100%', background: 'transparent', border: `1.5px solid ${P.blue}`, padding: '8px 10px', fontFamily: PM, fontSize: 12, color: P.blue, outline: 'none' }} />
+        </div>
+        <div style={{ marginTop: 16, marginBottom: 24 }}>
+          <div style={{ background: P.green, padding: '12px', textAlign: 'center', border: `2px solid ${P.blue}`, cursor: 'pointer' }} onClick={(e) => { e.currentTarget.innerText = `familiar.fm ${FEST.name} ${FEST.dayLabel} created!`; }}>
+            <span style={{ fontFamily: PF, fontWeight: 800, fontSize: 16, color: P.paper }}>Export day → Spotify</span>
+          </div>
+          <div style={{ fontFamily: PM, fontSize: 9, color: 'rgba(10,83,240,0.65)', marginTop: 6, textAlign: 'center' }}>Creates a playlist with each artist's top 5 songs. Title: familiar.fm {FEST.name}, {FEST.dayLabel}</div>
         </div>
       </div>
       <HubTab active="schedule" badge="3" navigate={navigate} />

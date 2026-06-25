@@ -12,14 +12,18 @@ export default function LogSet() {
 
   return (
     <APhone>
-      <ScreenHead onBack={() => navigate(-1)} kicker="LOG A SET" title={<span>Third Eye<br/>Blind</span>} right={<span onClick={() => navigate('/profile')} style={{ fontFamily: SM, fontSize: 12, color: S.blue, textDecoration: 'underline', cursor: 'pointer' }}>Skip</span>} />
+      <ScreenHead onBack={() => navigate(-1)} kicker="LOG A SET" title={
+        <select style={{ fontFamily: SF, fontWeight: 800, fontSize: 34, lineHeight: 0.9, color: S.blue, background: 'transparent', border: 'none', outline: 'none', appearance: 'none', textTransform: 'uppercase', mixBlendMode: 'multiply', width: '100%', cursor: 'pointer', padding: 0 }}>
+          {FEST.artists.map(a => <option key={a.id} value={a.name}>{a.name}</option>)}
+        </select>
+      } right={<span onClick={() => navigate('/profile')} style={{ fontFamily: SM, fontSize: 12, color: S.blue, textDecoration: 'underline', cursor: 'pointer' }}>Skip</span>} />
       <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', padding: '0 22px' }}>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 14 }}>
           {['Summerfest ’26', FEST.dayLabel, 'BMO Pavilion'].map((c) => (
             <span key={c} style={{ fontFamily: SM, fontSize: 10, color: S.blue, border: `2px solid ${S.blue}`, padding: '4px 9px' }}>{c}</span>
           ))}
         </div>
-        <div style={{ height: 168, border: `2.5px dashed ${S.blue}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, position: 'relative', overflow: 'hidden' }}>
+        <div onClick={() => alert('Opening camera roll...')} style={{ height: 168, border: `2.5px dashed ${S.blue}`, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, position: 'relative', overflow: 'hidden', cursor: 'pointer' }}>
           <GeoStar size={48} color="blue" points={4} />
           <span style={{ fontFamily: SF, fontWeight: 800, fontSize: 15, color: S.blue, mixBlendMode: 'multiply' }}>Add a photo</span>
           <span style={{ fontFamily: SM, fontSize: 9.5, color: 'rgba(10,83,240,0.6)' }}>from your camera roll</span>

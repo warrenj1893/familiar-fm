@@ -27,7 +27,7 @@ export default function Login() {
         </div>
         <div style={{ position: 'relative', zIndex: 2, padding: '0 24px 30px', display: 'flex', flexDirection: 'column', gap: 11 }}>
           <Btn kind="yellow" style={{ width: '100%' }} onClick={() => navigate('/authorize')}>▶  Continue with Spotify</Btn>
-          <Btn kind="ghost" dark style={{ width: '100%' }}>  Continue with Apple Music</Btn>
+          <Btn kind="ghost" dark style={{ width: '100%' }} onClick={() => navigate('/authorize')}>  Continue with Apple Music</Btn>
         </div>
         <Grain opacity={0.2} />
       </div>

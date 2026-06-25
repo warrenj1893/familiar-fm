@@ -10,6 +10,8 @@ const SM = "'DM Mono', monospace";
 export default function Profile() {
   const navigate = useNavigate();
   const [tab, setTab] = useState('log');
+  const [privacy, setPrivacy] = useState({ 'Public profile': true, 'Show where I’m going': false, 'Log visible to friends': true });
+  const togglePrivacy = (k) => setPrivacy(p => ({ ...p, [k]: !p[k] }));
   
   const stats = [['38', 'shows'], ['214', 'artists'], ['9', 'festivals'], ['6', 'years']];
   const logs = [
@@ -24,9 +26,12 @@ export default function Profile() {
       <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         <div style={{ position: 'relative', overflow: 'hidden', background: S.blue, padding: '16px 22px 20px', flex: 'none' }}>
           <div style={{ position: 'absolute', right: -44, top: -50 }}><GeoStar size={150} color="yellow" points={4} rot={10} /></div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, position: 'relative' }}>
-            <Avatar f={FEST.user} size={64} ring={S.blue} />
-            <div><div style={{ fontFamily: SF, fontWeight: 800, fontSize: 26, color: S.paper, letterSpacing: '-0.02em' }}>{FEST.user.handle}</div><div style={{ fontFamily: SM, fontSize: 11, color: S.paper, marginTop: 3 }}>The Indie Lifer</div></div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, position: 'relative', justifyContent: 'space-between' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+              <Avatar f={FEST.user} size={64} ring={S.blue} />
+              <div><div style={{ fontFamily: SF, fontWeight: 800, fontSize: 26, color: S.paper, letterSpacing: '-0.02em' }}>{FEST.user.handle}</div><div style={{ fontFamily: SM, fontSize: 11, color: S.paper, marginTop: 3 }}>The Indie Lifer</div></div>
+            </div>
+            <span onClick={() => navigate('/')} style={{ fontFamily: SM, fontSize: 11, color: S.paper, textDecoration: 'underline', cursor: 'pointer' }}>Logout</span>
           </div>
           <div style={{ display: 'flex', gap: 8, marginTop: 18, position: 'relative' }}>
             {stats.map(([n, l]) => (
@@ -68,10 +73,10 @@ export default function Profile() {
           )}
           {tab === 'privacy' && (
             <div>
-              {[['Public profile', true], ['Show where I’m going', false], ['Log visible to friends', true]].map(([l, on]) => (
-                <div key={l} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '13px 0', borderBottom: `1.5px solid rgba(10,83,240,0.14)` }}>
+              {Object.entries(privacy).map(([l, on]) => (
+                <div key={l} onClick={() => togglePrivacy(l)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '13px 0', borderBottom: `1.5px solid rgba(10,83,240,0.14)`, cursor: 'pointer' }}>
                   <span style={{ fontFamily: SF, fontWeight: 600, fontSize: 14, color: S.blue }}>{l}</span>
-                  <span style={{ width: 46, height: 26, background: on ? S.blue : 'transparent', border: `2px solid ${S.blue}`, borderRadius: 999, position: 'relative', mixBlendMode: on ? 'multiply' : 'normal' }}><span style={{ position: 'absolute', top: 2, left: on ? 22 : 2, width: 18, height: 18, borderRadius: 999, background: on ? S.yellow : S.blue }}></span></span>
+                  <span style={{ width: 46, height: 26, background: on ? S.blue : 'transparent', border: `2px solid ${S.blue}`, borderRadius: 999, position: 'relative', mixBlendMode: on ? 'multiply' : 'normal', transition: 'all 0.2s' }}><span style={{ position: 'absolute', top: 2, left: on ? 22 : 2, width: 18, height: 18, borderRadius: 999, background: on ? S.yellow : S.blue, transition: 'all 0.2s' }}></span></span>
                 </div>
               ))}
             </div>

@@ -4,7 +4,7 @@ import { POS as O, Ink, GeoStar } from '../components/poster-kit';
 import { APhone, Avatar, AvatarStack, HubTab, ScreenHead } from '../components/app-kit';
 import { FEST } from '../data/fest';
 
-export default function Discover() {
+export default function Festivals() {
   const navigate = useNavigate();
   const OF = "'Bricolage Grotesque', sans-serif";
   const OM = "'DM Mono', monospace";
@@ -21,7 +21,13 @@ export default function Discover() {
   return (
     <APhone>
       <ScreenHead kicker="FESTIVALS" title="Where to?" right={<Avatar f={FEST.user} size={30} />} />
-      <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', padding: '0 22px' }}>
+      <div style={{ flex: 1, minHeight: 0, overflow: 'auto', padding: '0 22px' }}>
+        <div style={{ marginBottom: 18, marginTop: 18 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, border: `2.5px solid ${O.blue}`, padding: '10px 14px', background: O.paper }}>
+            <span style={{ fontFamily: OM, fontSize: 16, color: O.blue }}>⚲</span>
+            <input type="text" placeholder="Search festivals..." style={{ border: 'none', background: 'transparent', outline: 'none', fontFamily: OM, fontSize: 12, color: O.blue, width: '100%' }} />
+          </div>
+        </div>
         <div style={{ background: O.blue, padding: '12px 14px 14px', position: 'relative', overflow: 'hidden', marginBottom: 18 }}>
           <Ink as="div" color={O.yellow} style={{ right: -30, top: -30, width: 110, height: 110, borderRadius: '50%' }} />
           <div style={{ fontFamily: OM, fontSize: 10, letterSpacing: '0.18em', color: O.paper, position: 'relative' }}>★ JUST DROPPED</div>

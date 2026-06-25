@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login.jsx';
 import Authorize from './pages/Authorize.jsx';
 import FriendSetup from './pages/FriendSetup.jsx';
-import Discover from './pages/Discover.jsx';
+import Festivals from './pages/Festivals.jsx';
 import PlanHome from './pages/PlanHome.jsx';
 import Lineup from './pages/Lineup.jsx';
 import Schedule from './pages/Schedule.jsx';
@@ -23,7 +23,7 @@ export default function App() {
         <Route path="/" element={<Login />} />
         <Route path="/authorize" element={<Authorize />} />
         <Route path="/friend-setup" element={<FriendSetup />} />
-        <Route path="/discover" element={<Discover />} />
+        <Route path="/festivals" element={<Festivals />} />
         <Route path="/plan" element={<PlanHome />} />
         <Route path="/foryou" element={<ForYou />} />
         <Route path="/lineup" element={<Lineup />} />
