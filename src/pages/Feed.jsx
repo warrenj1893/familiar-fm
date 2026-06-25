@@ -65,7 +65,7 @@ export default function Feed() {
           <React.Fragment>
             <div style={{ display: 'flex', gap: 8, marginBottom: 14, flexWrap: 'wrap' }}>
               {['All', 'Summerfest', 'Muse', 'Indie'].map((c, i) => (
-                <span key={c} style={{ fontFamily: SM, fontSize: 11, color: i === 0 ? S.paper : S.blue, background: i === 0 ? S.blue : 'transparent', border: `2px solid ${S.blue}`, padding: '4px 11px', mixBlendMode: i === 0 ? 'multiply' : 'normal' }}>{c}</span>
+                <button key={c} className={i === 0 ? "pill pill-lime" : "pill pill-ghost"} style={{ height: 32, fontSize: 12, padding: '0 12px' }}>{c}</button>
               ))}
             </div>
             <FeedPost f={{ name: 'Dani Cruz', initial: 'DC', color: 'green' }} festival="Summerfest" day="FRI JUN 19" artist="flipturn" caption="first time seeing them — instant favorite" photoInk={S.blue} likes={48} />

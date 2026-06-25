@@ -8,10 +8,10 @@ export const AMONO = "'DM Mono', monospace";
 export const TIER = {
   know:  { ink: K.blue,  label: 'KNOW' },
   heard: { ink: K.green, label: 'HEARD' },
-  new:   { ink: '#9A7A00', label: 'NEW' },
+  new:   { ink: K.red, label: 'NEW' },
 };
 
-export const AV = { blue: K.blue, green: K.green, yellow: K.yellow, ink: '#241B33' };
+export const AV = { blue: K.blue, green: K.green, yellow: K.yellow, ink: '#241B33', teal: K.teal, red: K.red, lime: K.lime, butter: K.butter, navy: K.navy };
 
 export function APhone({ children }) {
   return (
@@ -87,6 +87,9 @@ export function Btn({ children, kind = 'fill', dark, style, ...rest }) {
   const kinds = {
     fill:  { background: K.blue, color: K.paper, mixBlendMode: dark ? 'normal' : 'multiply' },
     yellow:{ background: K.yellow, color: K.blue },
+    teal:  { background: K.teal, color: K.paper, mixBlendMode: dark ? 'normal' : 'multiply' },
+    red:   { background: K.red, color: K.paper, mixBlendMode: dark ? 'normal' : 'multiply' },
+    lime:  { background: K.lime, color: K.navy, mixBlendMode: dark ? 'normal' : 'multiply' },
     ghost: { background: 'transparent', color: dark ? K.paper : K.blue, border: `2px solid ${dark ? K.paper : K.blue}` },
   };
   return <button style={{ ...base, ...kinds[kind], ...style }} {...rest}>{children}</button>;

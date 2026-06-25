@@ -5,7 +5,13 @@ export const POS = {
   blue:   '#0A53F0',
   yellow: '#FFD400',
   green:  '#0B6B2E',
-  ink:    '#241B33'
+  ink:    '#241B33',
+  teal:   '#10B0A0',
+  red:    '#EE4326',
+  lime:   '#CCFF00',
+  butter: '#F2C23E',
+  navy:   '#111A54',
+  slate:  '#6A6F9C'
 };
 
 const GRAIN = "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")";

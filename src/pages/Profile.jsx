@@ -36,8 +36,8 @@ export default function Profile() {
           <div style={{ display: 'flex', gap: 8, marginTop: 18, position: 'relative' }}>
             {stats.map(([n, l]) => (
               <div key={l} style={{ flex: 1, textAlign: 'center' }}>
-                <div style={{ fontFamily: SF, fontWeight: 800, fontSize: 30, color: S.yellow, lineHeight: 0.8 }}>{n}</div>
-                <div style={{ fontFamily: SM, fontSize: 8.5, color: S.paper, marginTop: 5, letterSpacing: '0.04em' }}>{l}</div>
+                <div className="hand" style={{ fontSize: 32, color: S.yellow, lineHeight: 0.8 }}>{n}</div>
+                <div className="label" style={{ color: S.paper, marginTop: 5, letterSpacing: '0.04em' }}>{l}</div>
               </div>
             ))}
           </div>
