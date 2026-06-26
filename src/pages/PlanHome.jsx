@@ -38,7 +38,7 @@ export default function PlanHome() {
           </div>
         </div>
         
-        <div style={{ flex: 1, overflowY: 'auto' }}>
+        <div style={{ flex: 1, overflowY: 'auto', paddingBottom: 80 }}>
           {/* pillar grid */}
           <div style={{ padding: '16px 22px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             {pillars.map(([k, t, sub, c, route]) => (

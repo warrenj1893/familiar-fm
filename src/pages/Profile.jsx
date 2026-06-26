@@ -49,7 +49,7 @@ export default function Profile() {
             </div>
           ))}
         </div>
-        <div style={{ padding: '14px 22px 0', flex: 1, overflowY: 'auto' }}>
+        <div style={{ padding: '14px 22px 80px', flex: 1, overflowY: 'auto' }}>
           {tab === 'upcoming' && (
             <div style={{ border: `2px solid ${S.blue}`, padding: '14px 16px' }}>
               <div style={{ fontFamily: SF, fontWeight: 800, fontSize: 22, color: S.blue, mixBlendMode: 'multiply' }}>Summerfest ’26</div>

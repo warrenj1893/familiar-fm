@@ -20,6 +20,8 @@ export default function FriendSetup() {
   const [added, setAdded] = useState(new Set());
   const [popup, setPopup] = useState(null); // 'contacts', 'username'
   const [igConnected, setIgConnected] = useState(false);
+  const [unameSearch, setUnameSearch] = useState('');
+  const [unameResult, setUnameResult] = useState(null);
 
   const toggleAdd = (id) => setAdded(prev => {
     const next = new Set(prev);
@@ -80,7 +82,7 @@ export default function FriendSetup() {
             {['Mom', 'David (Work)', 'Sarah'].map((n) => (
               <div key={n} style={{ display: 'flex', justifyContent: 'space-between', padding: '12px 0', borderBottom: `1px solid rgba(10,83,240,0.1)` }}>
                 <span style={{ fontFamily: OF, fontWeight: 700, fontSize: 16, color: O.blue }}>{n}</span>
-                <Btn kind="ghost" style={{ height: 28, fontSize: 11, padding: '0 10px' }}>Invite</Btn>
+                <Btn kind="ghost" style={{ height: 28, fontSize: 11, padding: '0 10px' }} onClick={(e) => { e.target.innerText = 'Sent ✓'; e.target.style.background = O.green; e.target.style.color = O.paper; }}>Invite</Btn>
               </div>
             ))}
           </div>
@@ -89,13 +91,26 @@ export default function FriendSetup() {
 
       {popup === 'username' && (
         <div style={{ position: 'absolute', inset: 0, zIndex: 100, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: 'rgba(36,27,51,0.5)' }}>
-          <div style={{ background: O.paper, borderTop: `3px solid ${O.blue}`, padding: '20px 22px', height: '40%' }}>
+          <div style={{ background: O.paper, borderTop: `3px solid ${O.blue}`, padding: '20px 22px', minHeight: '40%' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 14 }}>
               <div style={{ fontFamily: OF, fontWeight: 800, fontSize: 22, color: O.blue }}>Search Username</div>
-              <span onClick={() => setPopup(null)} style={{ fontFamily: OM, fontSize: 20, color: O.blue, cursor: 'pointer' }}>✕</span>
+              <span onClick={() => { setPopup(null); setUnameResult(null); setUnameSearch(''); }} style={{ fontFamily: OM, fontSize: 20, color: O.blue, cursor: 'pointer' }}>✕</span>
             </div>
-            <input type="text" autoFocus placeholder="@handle" style={{ width: '100%', border: `2px solid ${O.blue}`, padding: '12px', fontFamily: OM, fontSize: 14, color: O.blue, background: 'transparent', outline: 'none' }} />
-            <Btn kind="fill" onClick={() => setPopup(null)} style={{ width: '100%', marginTop: 14 }}>Search</Btn>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <input type="text" autoFocus placeholder="@handle" value={unameSearch} onChange={e => setUnameSearch(e.target.value)} style={{ flex: 1, border: `2px solid ${O.blue}`, padding: '12px', fontFamily: OM, fontSize: 14, color: O.blue, background: 'transparent', outline: 'none' }} />
+              <Btn kind="fill" onClick={() => {
+                if (!unameSearch) return;
+                const found = suggested.find(f => f.handle.toLowerCase().includes(unameSearch.toLowerCase()) || f.name.toLowerCase().includes(unameSearch.toLowerCase()));
+                setUnameResult(found || { id: 'new', name: unameSearch, handle: `@${unameSearch.replace('@', '')}`, initial: unameSearch[0].toUpperCase(), color: 'butter' });
+              }}>Go</Btn>
+            </div>
+            {unameResult && (
+              <div style={{ marginTop: 20, display: 'flex', alignItems: 'center', gap: 12, padding: '14px', border: `2px solid ${O.blue}` }}>
+                <Avatar f={unameResult} size={38} />
+                <div style={{ flex: 1, minWidth: 0 }}><div style={{ fontFamily: OF, fontWeight: 700, fontSize: 15, color: O.blue }}>{unameResult.name}</div><div style={{ fontFamily: OM, fontSize: 10, color: 'rgba(10,83,240,0.6)' }}>{unameResult.handle}</div></div>
+                <Btn kind="fill" onClick={(e) => { e.target.innerText = 'Added'; e.target.style.background = O.green; }} style={{ height: 36, fontSize: 13, padding: '0 16px' }}>Add</Btn>
+              </div>
+            )}
           </div>
         </div>
       )}

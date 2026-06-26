@@ -25,8 +25,8 @@ function FeedPost({ f, festival, day, artist, withWho, caption, photoInk, likes,
         </div>
       )}
       {showComment && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 100, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: 'rgba(0,0,0,0.5)' }}>
-          <div style={{ background: S.paper, padding: '24px 22px 34px', borderTopLeftRadius: 24, borderTopRightRadius: 24, border: `2px solid ${S.blue}`, height: '60vh', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ position: 'fixed', inset: 0, height: '100dvh', zIndex: 100, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', background: 'rgba(0,0,0,0.5)' }}>
+          <div style={{ background: S.paper, padding: '24px 22px 34px', borderTopLeftRadius: 24, borderTopRightRadius: 24, border: `2px solid ${S.blue}`, height: '65dvh', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
               <div style={{ fontFamily: SF, fontWeight: 800, fontSize: 18, color: S.blue }}>Comments</div>
               <span onClick={() => setShowComment(false)} style={{ fontSize: 24, cursor: 'pointer', color: S.blue }}>✕</span>
