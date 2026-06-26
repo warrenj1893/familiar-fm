@@ -31,7 +31,7 @@ export default function Lineup() {
   return (
     <APhone>
       <div style={{ flex: 'none', position: 'relative', overflow: 'hidden', background: P.paper, padding: '12px 22px 18px', borderBottom: `2.5px solid ${P.blue}` }}>
-        <div style={{ position: 'absolute', right: -48, top: -48 }}><FacetBall size={144} bars={3} /></div>
+        <div style={{ position: 'absolute', right: -48, top: -48, zIndex: 0 }}><FacetBall size={144} bars={3} /></div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 10 }}>
           <div style={{ fontFamily: PM, fontSize: 11, letterSpacing: '0.22em', color: P.blue, mixBlendMode: 'multiply' }}>SUMMERFEST · {FEST.dayLabel}</div>
           <span onClick={() => navigate('/festivals')} style={{ fontFamily: PM, fontSize: 10, letterSpacing: '0.1em', color: P.blue, textDecoration: 'underline', cursor: 'pointer' }}>Festivals →</span>

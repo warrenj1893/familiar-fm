@@ -45,13 +45,13 @@ export function HubTab({ active = 'plan', badge, dark, navigate }) {
   return (
     <div style={{ flex: 'none', height: 76, borderTop: `2.5px solid ${dark ? K.yellow : K.blue}`, background: dark ? K.blue : K.paper, display: 'flex', alignItems: 'center', paddingBottom: 8 }}>
       {['plan', 'schedule', 'feed', 'notifs', 'profile'].map((id) => (
-        <div key={id} onClick={() => handleNav(id)} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, position: 'relative', cursor: 'pointer' }}>
+        <button key={id} onClick={() => handleNav(id)} aria-label={labels[id]} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, position: 'relative', cursor: 'pointer', background: 'transparent', border: 'none', padding: 0, outline: 'none' }}>
           <div style={{ position: 'relative' }}>
             <svg width="25" height="25" viewBox="0 0 24 24" style={{ mixBlendMode: dark ? 'normal' : 'multiply' }}>{icons[id](active === id ? on : off)}</svg>
             {id === 'notifs' && badge ? <span style={{ position: 'absolute', top: -3, right: -7, minWidth: 16, height: 16, padding: '0 3px', background: K.yellow, color: K.blue, border: `1.5px solid ${dark ? K.blue : K.paper}`, borderRadius: 999, fontFamily: AMONO, fontWeight: 500, fontSize: 9, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{badge}</span> : null}
           </div>
           <span style={{ fontFamily: AMONO, fontSize: 9.5, letterSpacing: '0.04em', color: active === id ? on : off }}>{labels[id]}</span>
-        </div>
+        </button>
       ))}
     </div>
   );

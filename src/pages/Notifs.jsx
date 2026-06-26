@@ -14,6 +14,7 @@ export default function Notifs() {
   
   const [reqs, setReqs] = useState([fr('max')]);
   const [confirmed, setConfirmed] = useState(new Set());
+  const [acted, setActed] = useState(new Set());
   
   const activity = [
     { type: 'invite', who: 'sam', txt: 'invited you to Third Eye Blind', sub: 'FRI · 8:30 PM · BMO', act: true },
@@ -52,7 +53,11 @@ export default function Notifs() {
               <div style={{ fontFamily: SF, fontWeight: 600, fontSize: 13.5, color: S.blue, lineHeight: 1.25 }}>{n.who ? <b style={{ fontWeight: 800 }}>{fn(fr(n.who))} </b> : ''}{n.txt}</div>
               <div style={{ fontFamily: SM, fontSize: 9, color: n.type === 'soon' ? S.green : 'rgba(10,83,240,0.6)', marginTop: 4 }}>{n.sub}</div>
             </div>
-            {n.act && <div style={{ display: 'flex', gap: 6, flex: 'none' }}><Btn kind="fill" style={{ height: 32, fontSize: 11, padding: '0 11px' }}>{n.type === 'blend' ? 'Open' : 'Accept'}</Btn></div>}
+            {n.act && (
+              <div style={{ display: 'flex', gap: 6, flex: 'none' }}>
+                <Btn kind="fill" onClick={(e) => { e.stopPropagation(); setActed(p => new Set(p).add(i)); }} style={{ height: 32, fontSize: 11, padding: '0 11px', background: acted.has(i) ? S.green : S.blue }}>{acted.has(i) ? 'Done ✓' : (n.type === 'blend' ? 'Open' : 'Accept')}</Btn>
+              </div>
+            )}
           </div>
         ))}
       </div>

@@ -42,7 +42,7 @@ export default function Festivals() {
           </div>
         </div>
         {fests.filter(f => f.n.toLowerCase().includes(search.toLowerCase())).map((ft) => (
-          <div key={ft.n} onClick={() => navigate('/plan')} style={{ borderBottom: `1.5px solid rgba(10,83,240,0.16)`, padding: '14px 0', cursor: 'pointer' }}>
+          <div key={ft.n} onClick={() => ft.n.includes("Summerfest") ? navigate('/plan') : alert(`Lineup for ${ft.n} coming soon!`)} style={{ borderBottom: `1.5px solid rgba(10,83,240,0.16)`, padding: '14px 0', cursor: 'pointer' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>

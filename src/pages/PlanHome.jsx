@@ -14,7 +14,7 @@ export default function PlanHome() {
   const going = F.friends.filter((f) => f.going);
   const pillars = [
     ['KNOW', 'Lineup', '41 acts you know', O.teal, '/lineup'],
-    ['RECOMMEND', 'For You', '11 you’d love', O.lime, '/festivals'],
+    ['RECOMMEND', 'For You', '11 you’d love', O.lime, '/discover'],
     ['BUILD', 'Schedule', 'Fri · 5 sets, 1 clash', O.red, '/schedule'],
     ['RELIVE', 'Recap', 'Share your weekend', O.butter, '/recap'],
   ];

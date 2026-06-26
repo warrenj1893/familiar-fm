@@ -35,9 +35,7 @@ export default function LogSet() {
             <span style={{ fontFamily: SM, fontSize: 10, color: S.green }}>auto-tagged from your plan</span>
           </div>
         </div>
-        <div style={{ marginTop: 16, border: `2px solid ${S.blue}`, padding: '12px 14px', minHeight: 70 }}>
-          <span style={{ fontFamily: SF, fontWeight: 500, fontSize: 14, color: 'rgba(10,83,240,0.5)' }}>Add a caption or quick review…</span>
-        </div>
+        <textarea placeholder="Add a caption or quick review…" style={{ marginTop: 16, border: `2px solid ${S.blue}`, padding: '12px 14px', minHeight: 70, width: '100%', background: 'transparent', outline: 'none', fontFamily: SF, fontWeight: 500, fontSize: 14, color: S.blue, resize: 'none' }}></textarea>
         <div style={{ display: 'flex', gap: 8, marginTop: 14 }}>
           {['Public', 'Friends', 'Private'].map((v, i) => (
             <span key={v} style={{ flex: 1, textAlign: 'center', fontFamily: SM, fontSize: 11, color: i === 0 ? S.paper : S.blue, background: i === 0 ? S.blue : 'transparent', border: `2px solid ${S.blue}`, padding: '8px 0', mixBlendMode: i === 0 ? 'multiply' : 'normal' }}>{v}</span>
