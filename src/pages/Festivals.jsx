@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { POS as O, Ink, GeoStar } from '../components/poster-kit';
 import { APhone, Avatar, AvatarStack, HubTab, ScreenHead } from '../components/app-kit';
@@ -6,6 +6,7 @@ import { FEST } from '../data/fest';
 
 export default function Festivals() {
   const navigate = useNavigate();
+  const [search, setSearch] = useState('');
   const OF = "'Bricolage Grotesque', sans-serif";
   const OM = "'DM Mono', monospace";
   const fests = [
@@ -25,7 +26,7 @@ export default function Festivals() {
         <div style={{ marginBottom: 18, marginTop: 18 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, border: `2.5px solid ${O.blue}`, padding: '10px 14px', background: O.paper }}>
             <span style={{ fontFamily: OM, fontSize: 16, color: O.blue }}>⚲</span>
-            <input type="text" placeholder="Search festivals..." style={{ border: 'none', background: 'transparent', outline: 'none', fontFamily: OM, fontSize: 12, color: O.blue, width: '100%' }} />
+            <input type="text" placeholder="Search festivals..." value={search} onChange={(e) => setSearch(e.target.value)} style={{ border: 'none', background: 'transparent', outline: 'none', fontFamily: OM, fontSize: 12, color: O.blue, width: '100%' }} />
           </div>
         </div>
         <div style={{ background: O.blue, padding: '12px 14px 14px', position: 'relative', overflow: 'hidden', marginBottom: 18 }}>
@@ -40,7 +41,7 @@ export default function Festivals() {
             ))}
           </div>
         </div>
-        {fests.map((ft) => (
+        {fests.filter(f => f.n.toLowerCase().includes(search.toLowerCase())).map((ft) => (
           <div key={ft.n} onClick={() => navigate('/plan')} style={{ borderBottom: `1.5px solid rgba(10,83,240,0.16)`, padding: '14px 0', cursor: 'pointer' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
               <div style={{ flex: 1, minWidth: 0 }}>

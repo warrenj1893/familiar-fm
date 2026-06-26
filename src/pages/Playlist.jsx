@@ -11,6 +11,7 @@ export default function Playlist() {
   const blendCrew = FEST.friends.filter((f) => f.going);
   const tracks = [['Semi-Charmed Life', 'Third Eye Blind'], ['Take a Walk', 'Passion Pit'], ['August', 'flipturn'], ['The Killing Moon', 'Echo & The Bunnymen'], ['Colors', 'Grouplove']];
   
+  const [playing, setPlaying] = useState(null);
   const [showBlend, setShowBlend] = useState(false);
   const [blendChecked, setBlendChecked] = useState(new Set(blendCrew.map(f => f.id)));
   
@@ -41,10 +42,10 @@ export default function Playlist() {
         </div>
         <div style={{ flex: 1, minHeight: 0, overflowY: 'auto', padding: '0 22px' }}>
           {tracks.map(([t, ar], i) => (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderBottom: '1.5px solid rgba(10,83,240,0.14)' }}>
-              <span style={{ fontFamily: PM, fontSize: 11, color: 'rgba(10,83,240,0.45)', width: 18, flex: 'none' }}>{i + 1}</span>
+            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 10px', borderBottom: '1.5px solid rgba(10,83,240,0.14)', background: playing === i ? 'rgba(10,83,240,0.06)' : 'transparent', marginLeft: -10, marginRight: -10 }}>
+              <span style={{ fontFamily: PM, fontSize: 11, color: 'rgba(10,83,240,0.45)', width: 18, flex: 'none', textAlign: 'center' }}>{i + 1}</span>
               <div style={{ flex: 1, minWidth: 0 }}><div style={{ fontFamily: PF, fontWeight: 700, fontSize: 15, color: P.blue }}>{t}</div><div style={{ fontFamily: PM, fontSize: 9, color: 'rgba(10,83,240,0.65)', marginTop: 2 }}>{ar}</div></div>
-              <span style={{ fontFamily: PM, fontSize: 14, color: P.blue, cursor: 'pointer' }}>▶</span>
+              <span onClick={() => setPlaying(playing === i ? null : i)} style={{ fontFamily: PM, fontSize: 14, color: P.blue, cursor: 'pointer', padding: '0 8px' }}>{playing === i ? '■' : '▶'}</span>
             </div>
           ))}
         </div>

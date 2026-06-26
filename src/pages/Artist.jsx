@@ -18,6 +18,7 @@ export default function Artist() {
   const [invite, setInvite] = useState(false);
   const [added, setAdded] = useState(false);
   const [invited, setInvited] = useState(new Set(going.map(g => g.id)));
+  const [playing, setPlaying] = useState(null);
   
   const toggleInvite = (fid) => setInvited(prev => {
     const next = new Set(prev);
@@ -59,8 +60,8 @@ export default function Artist() {
           <div style={{ fontFamily: PF, fontWeight: 800, fontSize: 22, color: P.blue, letterSpacing: '-0.02em', mixBlendMode: 'multiply' }}>HEAR IT COMING</div>
           <div style={{ fontFamily: PM, fontSize: 10, color: P.blue, marginTop: 7, marginBottom: 4, letterSpacing: '0.06em' }}>FROM YOUR LIBRARY ↓</div>
           {lib.map(([s, f], i) => (
-            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '8px 0', borderBottom: '1.5px solid rgba(10,83,240,0.14)' }}>
-              <span style={{ fontFamily: PF, fontWeight: 700, fontSize: 15, color: P.blue, cursor: 'pointer' }}>▶ {s}</span>
+            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '8px 10px', borderBottom: '1.5px solid rgba(10,83,240,0.14)', background: playing === i ? 'rgba(10,83,240,0.06)' : 'transparent', marginLeft: -10, marginRight: -10 }}>
+              <span onClick={() => setPlaying(playing === i ? null : i)} style={{ fontFamily: PF, fontWeight: 700, fontSize: 15, color: P.blue, cursor: 'pointer' }}>{playing === i ? '■' : '▶'} {s}</span>
               <span style={{ fontFamily: PM, fontSize: 9, color: 'rgba(10,83,240,0.65)' }}>{f}</span>
             </div>
           ))}

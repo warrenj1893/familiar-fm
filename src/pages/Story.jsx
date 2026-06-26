@@ -37,6 +37,10 @@ export default function Story() {
       <APhone>
         <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', padding: 10, position: 'relative' }}>
           <span onClick={() => navigate(-1)} style={{ position: 'absolute', top: 16, left: 16, color: '#fff', fontSize: 24, cursor: 'pointer', zIndex: 10 }}>✕</span>
+          <span onClick={() => {
+            if (navigator.share) navigator.share({ title: 'My Recap', url: window.location.href }).catch(console.error);
+            else alert('Share: ' + window.location.href);
+          }} style={{ position: 'absolute', top: 22, right: 16, color: '#fff', fontSize: 14, cursor: 'pointer', zIndex: 10, fontFamily: SM, letterSpacing: '0.1em' }}>SHARE</span>
           <StoryWrapper bg={S.paper}>
             <div style={{ position: 'absolute', right: -70, top: -60 }}><FacetBall size={200} bars={3} /></div>
             <Ink as="div" color={S.yellow} style={{ left: -50, bottom: 60, width: 200, height: 200, borderRadius: '50%' }} />
@@ -68,6 +72,10 @@ export default function Story() {
     <APhone>
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#000', padding: 10, position: 'relative' }}>
         <span onClick={() => navigate(-1)} style={{ position: 'absolute', top: 16, left: 16, color: '#fff', fontSize: 24, cursor: 'pointer', zIndex: 10 }}>✕</span>
+        <span onClick={() => {
+          if (navigator.share) navigator.share({ title: 'My Lineup', url: window.location.href }).catch(console.error);
+          else alert('Share: ' + window.location.href);
+        }} style={{ position: 'absolute', top: 22, right: 16, color: '#fff', fontSize: 14, cursor: 'pointer', zIndex: 10, fontFamily: SM, letterSpacing: '0.1em' }}>SHARE</span>
         <StoryWrapper bg={S.blue}>
           <Ink as="div" color={S.yellow} style={{ left: -70, top: -50, width: 230, height: 230, borderRadius: '50%' }} />
           <div style={{ position: 'absolute', right: -36, top: 150 }}><GeoStar size={150} color="yellow" points={4} rot={12} /></div>
