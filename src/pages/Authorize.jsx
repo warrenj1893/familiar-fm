@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase';
 import { POS as O } from '../components/poster-kit';
 import { APhone, Avatar, Btn } from '../components/app-kit';
 import { FEST } from '../data/fest';
@@ -9,6 +11,16 @@ export default function Authorize() {
   const navigate = useNavigate();
   const [checked, setChecked] = useState({});
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [user, setUser] = useState(FEST.user);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => {
+      if (u) {
+        setUser({ name: u.displayName, handle: '@' + (u.email?.split('@')[0] || 'user'), initial: u.displayName?.[0] || 'U', color: 'blue', avatar: u.photoURL });
+      }
+    });
+    return unsub;
+  }, []);
   
   const OF = "'Bricolage Grotesque', sans-serif";
   const OM = "'DM Mono', monospace";
@@ -31,8 +43,8 @@ export default function Authorize() {
         <div style={{ fontFamily: OM, fontSize: 11, letterSpacing: '0.2em', color: O.blue }}>AUTHORIZE ACCESS</div>
         <div style={{ fontFamily: OF, fontWeight: 800, fontSize: 30, lineHeight: 0.9, letterSpacing: '-0.03em', color: O.blue, marginTop: 10 }}>Allow <Mark size={26} /> to connect</div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 16, padding: '10px 12px', border: `2px solid ${O.blue}` }}>
-          <Avatar f={FEST.user} size={32} />
-          <div style={{ flex: 1 }}><div style={{ fontFamily: OF, fontWeight: 700, fontSize: 14, color: O.blue }}>{FEST.user.handle}</div><div style={{ fontFamily: OM, fontSize: 10, color: 'rgba(10,83,240,0.6)' }}>Logged in</div></div>
+          <Avatar f={user} size={32} />
+          <div style={{ flex: 1 }}><div style={{ fontFamily: OF, fontWeight: 700, fontSize: 14, color: O.blue }}>{user.handle}</div><div style={{ fontFamily: OM, fontSize: 10, color: 'rgba(10,83,240,0.6)' }}>Logged in</div></div>
           <span onClick={() => navigate('/')} style={{ fontFamily: OM, fontSize: 11, color: O.blue, textDecoration: 'underline', cursor: 'pointer' }}>Not you?</span>
         </div>
         {scopes.map(([h, items], gi) => (

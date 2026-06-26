@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { POS as S } from '../components/poster-kit';
 import { APhone, Avatar, Btn, HubTab, ScreenHead } from '../components/app-kit';
+import { auth, db } from '../firebase';
+import { doc, setDoc } from 'firebase/firestore';
 import { FEST } from '../data/fest';
 
 const SF = "'Bricolage Grotesque', sans-serif";
@@ -40,7 +42,12 @@ export default function Notifs() {
             <div key={f.id} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderBottom: `1.5px solid rgba(10,83,240,0.14)` }}>
               <Avatar f={f} size={42} />
               <div style={{ flex: 1, minWidth: 0 }}><div style={{ fontFamily: SF, fontWeight: 700, fontSize: 15, color: S.blue }}>{f.name}</div><div style={{ fontFamily: SM, fontSize: 9.5, color: 'rgba(10,83,240,0.6)' }}>knows 5 acts you do</div></div>
-              <Btn kind="fill" onClick={() => setConfirmed(p => new Set(p).add(f.id))} style={{ height: 34, fontSize: 12, padding: '0 12px', background: isConfirmed ? S.yellow : S.blue, color: isConfirmed ? S.blue : S.paper }}>{isConfirmed ? 'Confirmed' : 'Confirm'}</Btn>
+              <Btn kind="fill" onClick={async () => {
+                setConfirmed(p => new Set(p).add(f.id));
+                if (auth.currentUser) {
+                  await setDoc(doc(db, 'users', auth.currentUser.uid, 'friends', f.id), f);
+                }
+              }} style={{ height: 34, fontSize: 12, padding: '0 12px', background: isConfirmed ? S.yellow : S.blue, color: isConfirmed ? S.blue : S.paper }}>{isConfirmed ? 'Confirmed' : 'Confirm'}</Btn>
               <span onClick={() => setReqs(reqs.filter(r => r.id !== f.id))} style={{ width: 34, height: 34, border: `2px solid ${S.blue}`, flex: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: S.blue, fontFamily: SM, cursor: 'pointer' }}>✕</span>
             </div>
           );

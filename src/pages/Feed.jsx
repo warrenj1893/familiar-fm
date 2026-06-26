@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth, db } from '../firebase';
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { POS as S, GeoStar, Ink } from '../components/poster-kit';
 import { APhone, Avatar, AvatarStack, HubTab, ScreenHead } from '../components/app-kit';
 import { FEST } from '../data/fest';
@@ -68,6 +70,15 @@ export default function Feed() {
   const navigate = useNavigate();
   const fr = (id) => FEST.friends.find((f) => f.id === id);
   const [tab, setTab] = useState('friends');
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const q = query(collection(db, 'feed'), orderBy('createdAt', 'desc'));
+    const unsub = onSnapshot(q, (snapshot) => {
+      setPosts(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    });
+    return unsub;
+  }, []);
   
   return (
     <APhone>
@@ -91,6 +102,9 @@ export default function Feed() {
               <AvatarStack people={[fr('sam'), fr('lia')]} size={30} />
               <div style={{ fontFamily: SF, fontWeight: 600, fontSize: 13.5, color: S.blue, lineHeight: 1.3 }}><b style={{ fontWeight: 800 }}>Sam & Lia</b> are going to <b style={{ fontWeight: 800 }}>Summerfest</b></div>
             </div>
+            {posts.map(p => (
+              <FeedPost key={p.id} f={{ name: p.userName, initial: p.userName?.[0], color: 'blue' }} festival={p.festival} day={p.date} artist={p.artist} caption={p.caption} photoInk={S.red} likes={0} />
+            ))}
             <FeedPost f={fr('jo')} festival="Summerfest" day="FRI JUN 19" artist="Holly Humberstone" withWho="you, Lia" caption="best set of the night, no contest 🌙" photoInk={S.blue} likes={12} />
             <FeedPost f={fr('sam')} festival="Summerfest" day="FRI JUN 19" artist="Third Eye Blind" withWho="Jo, Lia" caption="semi-charmed kinda night" photoInk={S.green} likes={9} />
           </React.Fragment>

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth, db } from '../firebase';
+import { collection, query, where, orderBy, onSnapshot } from 'firebase/firestore';
 import { POS as S, GeoStar, Ink } from '../components/poster-kit';
 import { APhone, Avatar, AvatarStack, HubTab } from '../components/app-kit';
 import { FEST } from '../data/fest';
@@ -11,10 +13,20 @@ export default function Profile() {
   const navigate = useNavigate();
   const [tab, setTab] = useState('log');
   const [privacy, setPrivacy] = useState({ 'Public profile': true, 'Show where I’m going': false, 'Log visible to friends': true });
+  const [userLogs, setUserLogs] = useState([]);
   const togglePrivacy = (k) => setPrivacy(p => ({ ...p, [k]: !p[k] }));
   
+  useEffect(() => {
+    if (!auth.currentUser) return;
+    const q = query(collection(db, 'feed'), where('uid', '==', auth.currentUser.uid), orderBy('createdAt', 'desc'));
+    const unsub = onSnapshot(q, (snapshot) => {
+      setUserLogs(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+    });
+    return unsub;
+  }, []);
+
   const stats = [['38', 'shows'], ['214', 'artists'], ['9', 'festivals'], ['6', 'years']];
-  const logs = [
+  const mockLogs = [
     { artist: 'Third Eye Blind', fest: 'Summerfest ’26', who: 'Jo, Lia', ink: S.blue },
     { artist: 'Father John Misty', fest: 'Pitchfork ’25', who: 'Sam', ink: S.green },
     { artist: 'Muse', fest: 'Lolla ’24', who: 'solo', ink: S.blue },
@@ -60,7 +72,16 @@ export default function Profile() {
           {tab === 'log' && (
             <>
               <div onClick={() => navigate('/log-set')} style={{ fontFamily: SF, fontWeight: 800, fontSize: 14, color: S.blue, border: `2px dashed ${S.blue}`, padding: '10px', textAlign: 'center', marginBottom: 16, cursor: 'pointer', mixBlendMode: 'multiply' }}>+ Log a set</div>
-              {logs.map((g, i) => (
+              {userLogs.map(g => (
+                <div key={g.id} style={{ display: 'flex', gap: 12, padding: '11px 0', borderBottom: `1.5px solid rgba(10,83,240,0.14)` }}>
+                  <div style={{ width: 52, height: 52, flex: 'none', background: S.red, position: 'relative', overflow: 'hidden' }}><Ink as="div" color={S.yellow} style={{ right: -10, top: -10, width: 34, height: 34, borderRadius: '50%' }} /></div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontFamily: SF, fontWeight: 800, fontSize: 17, color: S.blue, lineHeight: 0.95, mixBlendMode: 'multiply' }}>{g.artist}</div>
+                    <div style={{ fontFamily: SM, fontSize: 9.5, color: 'rgba(10,83,240,0.7)', marginTop: 4 }}>{g.festival} · {g.date}</div>
+                  </div>
+                </div>
+              ))}
+              {mockLogs.map((g, i) => (
                 <div key={i} style={{ display: 'flex', gap: 12, padding: '11px 0', borderBottom: `1.5px solid rgba(10,83,240,0.14)` }}>
                   <div style={{ width: 52, height: 52, flex: 'none', background: g.ink, position: 'relative', overflow: 'hidden' }}><Ink as="div" color={S.yellow} style={{ right: -10, top: -10, width: 34, height: 34, borderRadius: '50%' }} /></div>
                   <div style={{ flex: 1, minWidth: 0 }}>

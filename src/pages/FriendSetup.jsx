@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { POS as O } from '../components/poster-kit';
 import { APhone, Avatar, Btn, ScreenHead } from '../components/app-kit';
+import { auth, db } from '../firebase';
+import { doc, setDoc, deleteDoc } from 'firebase/firestore';
 import { FEST } from '../data/fest';
 
 export default function FriendSetup() {
@@ -23,11 +25,26 @@ export default function FriendSetup() {
   const [unameSearch, setUnameSearch] = useState('');
   const [unameResult, setUnameResult] = useState(null);
 
-  const toggleAdd = (id) => setAdded(prev => {
-    const next = new Set(prev);
-    if (next.has(id)) next.delete(id); else next.add(id);
-    return next;
-  });
+  const toggleAdd = async (id) => {
+    const isAdding = !added.has(id);
+    setAdded(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+    
+    if (auth.currentUser) {
+      const ref = doc(db, 'users', auth.currentUser.uid, 'friends', id);
+      try {
+        if (isAdding) {
+          const fData = suggested.find(f => f.id === id) || { id };
+          await setDoc(ref, fData);
+        } else {
+          await deleteDoc(ref);
+        }
+      } catch (e) { console.error('Error saving friend', e); }
+    }
+  };
 
   return (
     <APhone>
